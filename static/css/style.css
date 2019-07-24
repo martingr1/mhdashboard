@@ -20,15 +20,21 @@
 	opacity: 0.7;
 	margin: 10px;
 	padding: 20px;
-	max-width: 1080px;
+	max-width: 100%;
 	height: auto;
 }
 
+.chart {
+    margin: 0 auto;
+    padding: 25px;
+    display: inline-block;
+    
+}
 .chart-text {
-	font-size: small;
+	font-size: medium;
 	color: black;
-	margin: 10px 0;
-	padding: 25px;
+	margin: 10px;
+	padding: 10px;
 }
 
 .line {

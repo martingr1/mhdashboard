@@ -7,14 +7,17 @@ function makeGraphs(error, healthData) {
     var ndx = crossfilter(healthData);
 
     healthData.forEach(function(d) {
+        d.date = parseInt(d.date);
         d.age = parseInt(d.age);
     })
-    
+
+    /* show_average_age(ndx, gender, element); */
+
     show_select_company(ndx);
     show_gender_breakdown(ndx);
     show_country_breakdown(ndx);
     show_treatment_levels(ndx);
-   // show_average_age(ndx);
+
 
     dc.renderAll();
 }
@@ -23,7 +26,7 @@ function show_select_company(ndx) {
     var dim = ndx.dimension(dc.pluck("techcompany"));
     var group = dim.group();
 
-    dc.selectMenu("#select-company")
+    dc.selectMenu("#select_company")
         .dimension(dim)
         .group(group);
 }
@@ -69,10 +72,9 @@ function show_treatment_levels(ndx) {
         .xUnits(dc.units.ordinal)
 }
 
-/* function show_average_age(ndx) {
+/* function show_average_age(ndx, gender, element) {
 
-    var gender_dim = ndx.dimension(dc.pluck("gender"));
-
+    var gender_dim = ndx.dimension(dc.pluck("age"));
     var average_age = gender_dim.group().reduce(
 
         function(p, v) {
@@ -100,17 +102,17 @@ function show_treatment_levels(ndx) {
         }
     );
 
-    dc.barChart('#average_age')
-        .width(500)
-        .height(300)
-        .margins({ top: 10, right: 50, bottom: 30, left: 25 })
-        .dimension(gender_dim)
-        .group(average_age)
+    dc.numberDisplay(element)
+        .formatNumber(d3.format(".2"))
         .valueAccessor(function(d) {
-            return d.value.average;
+            if (d.count == 0) {
+                return 0;
+            }
+            else {
+                return (d.age / d.count);
+            }
         })
-        .x(d3.scale.ordinal())
-        .xUnits(dc.units.ordinal)
-        .xAxisLabel("Gender")
-} */
+        .group(age_dim)
+} 
 
+*/
