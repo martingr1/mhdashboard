@@ -1,0 +1,38 @@
+/*.background-image {
+	background-image: url("static/images/clouds_sunset_sky_119785_3840x2400.jpg");
+	background-position: center center;
+} */
+
+.intro-box {
+	box-sizing: border-box;
+	border-radius: 20px;
+	background-color: #D3D3D3;
+	opacity: 0.7;
+	margin: 10px;
+	padding: 20px;
+	height: auto;
+}
+
+.content-box {
+	box-sizing: border-box;
+	border-radius: 20px;
+	background-color: #D3D3D3;
+	opacity: 0.7;
+	margin: 10px;
+	padding: 20px;
+	max-width: 1080px;
+	height: auto;
+}
+
+.chart-text {
+	font-size: small;
+	color: black;
+	margin: 10px 0;
+	padding: 25px;
+}
+
+.line {
+	margin: 15px auto 15px;
+	color: #FFFFFF;
+	max-width: 75%;
+}
