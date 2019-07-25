@@ -11,7 +11,7 @@ function makeGraphs(error, healthData) {
         d.age = parseInt(d.age);
     })
 
-    show_average_age(ndx);
+    // show_average_age(ndx);
     show_average_age_gender(ndx, "Female", "#average_age_gender");
 
     show_select_company(ndx);
@@ -73,7 +73,7 @@ function show_treatment_levels(ndx) {
         .xUnits(dc.units.ordinal)
 }
 
-function show_average_age(ndx) {
+/* function show_average_age(ndx) {
     var dim = ndx.dimension(dc.pluck('gender'));
 
     function add_item(p, v) {
@@ -116,7 +116,7 @@ function show_average_age(ndx) {
         .elasticY(true)
         .xAxisLabel("Gender")
         .yAxis().ticks(4);
-}
+} */
 
 function show_average_age_gender(ndx, gender, element) {
     var averageAgeByGender = ndx.groupAll().reduce(
@@ -150,4 +150,16 @@ function show_average_age_gender(ndx, gender, element) {
             return { count: 0, total: 0, average: 0 };
         },
     );
+    
+    dc.numberDisplay(element)
+        .formatNumber(d3.format(".0"))
+        .valueAccessor(function (d) {
+            if (d.count == 0) {
+                return 0;
+            } else {
+                return (d.total / d.count);
+            }
+        })
+        .group(averageAgeByGender);
+
 }
