@@ -1,23 +1,29 @@
 queue()
-    .defer(d3.csv, "data/mhsurvey.csv")
+    .defer(d3.csv, "data/mhsurvey2.csv")
     .await(makeGraphs);
 
 function makeGraphs(error, healthData) {
 
     var ndx = crossfilter(healthData);
 
+    var parseDate = d3.time.format("%d/%m/%Y").parse;
+
+
     healthData.forEach(function(d) {
-        d.date = parseInt(d.date);
         d.age = parseInt(d.age);
+        d.date = parseDate(d.date);
+
     })
 
-    // show_average_age(ndx);
     show_average_age_gender(ndx, "Female", "#average_age_gender");
+    show_average_age_gender(ndx, "Male", "#average_age_male");
 
     show_select_company(ndx);
     show_gender_breakdown(ndx);
     show_country_breakdown(ndx);
     show_treatment_levels(ndx);
+
+    show_treatment_timeline(ndx);
 
 
     dc.renderAll();
@@ -52,7 +58,7 @@ function show_country_breakdown(ndx) {
 
     dc.pieChart('#country_breakdown')
         .height(200)
-        .radius(480)
+        .radius(400)
         .transitionDuration(500)
         .dimension(dim)
         .group(group);
@@ -66,100 +72,89 @@ function show_treatment_levels(ndx) {
     dc.barChart('#treatment_chart')
         .width(300)
         .height(200)
-        .margins({ top: 10, right: 50, bottom: 30, left: 25 })
+        .margins({ top: 10, right: 50, bottom: 30, left: 50 })
         .dimension(dim)
         .group(group)
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
 }
 
-/* function show_average_age(ndx) {
-    var dim = ndx.dimension(dc.pluck('gender'));
-
-    function add_item(p, v) {
-        p.count++;
-        p.total += v.age;
-        p.average = p.total / p.count;
-        return p;
-    }
-
-    function remove_item(p, v) {
-        p.count--;
-        if (p.count == 0) {
-            p.total = 0;
-            p.average = 0;
-        }
-        else {
-            p.total -= v.age;
-            p.average = p.total / p.count;
-        }
-        return p;
-    }
-
-    function initialise() {
-        return { count: 0, total: 0, average: 0 };
-    }
-
-    var averageAgeByGender = dim.group().reduce(add_item, remove_item, initialise);
-    dc.barChart("#average_age")
-        .width(400)
-        .height(300)
-        .margins({ top: 10, right: 50, bottom: 30, left: 50 })
-        .dimension(dim)
-        .group(averageAgeByGender)
-        .valueAccessor(function(d) {
-            return d.value.average.toFixed(2);
-        })
-        .transitionDuration(500)
-        .x(d3.scale.ordinal())
-        .xUnits(dc.units.ordinal)
-        .elasticY(true)
-        .xAxisLabel("Gender")
-        .yAxis().ticks(4);
-} */
-
 function show_average_age_gender(ndx, gender, element) {
     var averageAgeByGender = ndx.groupAll().reduce(
         function(p, v) {
-            if (v.gender === "Female") {
+            if (v.gender === gender) {
                 p.count++;
-                if (v.age === true) {
-                    p.count++;
-                    p.total += v.age;
-                    p.average = p.total / p.count;
-                }
+                p.total += v.age;
+                p.average = p.total / p.count;
             }
             return p;
         },
+
         function(p, v) {
-            if (v.gender === "Female") {
+            if (v.gender === gender) {
+
                 p.count--;
-                if (v.age === true) {
-                    p.count--;
-                    p.total += v.age;
-                    p.average = p.total / p.count;
-                }
-                else {
-                    p.total -= v.age;
-                    p.average = p.total / p.count;
-                }
+                p.total += v.age;
+                p.average = p.total / p.count;
+            }
+            else {
+                p.total -= v.age;
+                p.average = p.total / p.count;
             }
             return p;
         },
+
         function() {
             return { count: 0, total: 0, average: 0 };
         },
     );
-    
+
     dc.numberDisplay(element)
-        .formatNumber(d3.format(".0"))
-        .valueAccessor(function (d) {
+        .formatNumber(d3.format(".0f"))
+        .valueAccessor(function(d) {
             if (d.count == 0) {
                 return 0;
-            } else {
+            }
+            else {
                 return (d.total / d.count);
             }
         })
         .group(averageAgeByGender);
+}
 
+function show_treatment_timeline(ndx) {
+    var date_dim = ndx.dimension(dc.pluck('date'));
+    var treatment = date_dim.group().reduce(
+        function(p, v) {
+            if (v.treatment === 'yes') {
+                p.count++;
+                p.total += v.treatment;
+            }
+            return p;
+        },
+        function(p, v) {
+            if (v.treatment === 'yes') {
+                p.count--;
+                p.total += v.treatment;
+            }
+            return p;
+        },
+        function() {
+            return { count: 0, total: 0 };
+        },
+    )
+
+    var minDate = date_dim.bottom(1)[0].date;
+    var maxDate = date_dim.top(1)[0].date;
+
+    dc.lineChart("#treatment_timeline")
+        .width(1000)
+        .height(300)
+        .margins({ top: 10, right: 50, bottom: 30, left: 50 })
+        .dimension(date_dim)
+        .group(treatment)
+        .transitionDuration(500)
+        .x(d3.time.scale().domain([minDate, maxDate]))
+        .xAxisLabel("Year")
+        .yAxis().ticks(4);
 }
