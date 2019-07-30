@@ -124,8 +124,9 @@ function show_average_age_gender(ndx, gender, element) {
 
 function show_treatment_timeline(ndx) {
     var date_dim = ndx.dimension(dc.pluck('date'));
-    var treatment = date_dim.group().reduce(
-        function(p, v) {
+    var treatment_group = date_dim.group().reduce(
+         
+         function(p, v) {
             if (v.treatment === 'yes') {
                 p.count++;
                 p.total += v.treatment;
@@ -141,20 +142,26 @@ function show_treatment_timeline(ndx) {
         },
         function() {
             return { count: 0, total: 0 };
-        },
-    )
-
+        }
+    );
+    
+   
     var minDate = date_dim.bottom(1)[0].date;
     var maxDate = date_dim.top(1)[0].date;
 
     dc.lineChart("#treatment_timeline")
+    
         .width(1000)
         .height(300)
         .margins({ top: 10, right: 50, bottom: 30, left: 50 })
         .dimension(date_dim)
-        .group(treatment)
+        .group(treatment_group)
+        .valueAccessor(function(d) {
+            return d.value.treatment;
+        })
         .transitionDuration(500)
         .x(d3.time.scale().domain([minDate, maxDate]))
         .xAxisLabel("Year")
         .yAxis().ticks(4);
 }
+
