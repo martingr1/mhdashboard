@@ -5,6 +5,8 @@ queue()
 function makeGraphs(error, healthData) {
 
     var ndx = crossfilter(healthData);
+    
+    console.log(healthData);
 
     var parseDate = d3.time.format("%d/%m/%Y").parse;
 
@@ -12,8 +14,9 @@ function makeGraphs(error, healthData) {
     healthData.forEach(function(d) {
         d.age = parseInt(d.age);
         d.date = parseDate(d.date);
-
     })
+
+    show_respondents(ndx);
 
     show_average_age_gender(ndx, "Female", "#average_age_gender");
     show_average_age_gender(ndx, "Male", "#average_age_male");
@@ -25,8 +28,21 @@ function makeGraphs(error, healthData) {
 
     show_treatment_timeline(ndx);
 
+    show_physical_impact(ndx);
+    show_mental_impact(ndx);
+    show_family_history(ndx);
+
 
     dc.renderAll();
+}
+
+function show_respondents(ndx) {
+    
+    var all = ndx.groupAll();
+    
+     dc.dataCount('#respondents_display')
+        .dimension(ndx)
+        .group(all);
 }
 
 function show_select_company(ndx) {
@@ -58,8 +74,9 @@ function show_country_breakdown(ndx) {
 
     dc.pieChart('#country_breakdown')
         .height(200)
-        .radius(400)
+        .radius(480)
         .transitionDuration(500)
+        .legend(dc.legend().x(320).y(20).itemHeight(15).gap(5))
         .dimension(dim)
         .group(group);
 }
@@ -82,25 +99,16 @@ function show_treatment_levels(ndx) {
 function show_average_age_gender(ndx, gender, element) {
     var averageAgeByGender = ndx.groupAll().reduce(
         function(p, v) {
-            if (v.gender === gender) {
-                p.count++;
-                p.total += v.age;
-                p.average = p.total / p.count;
-            }
+            p.count++;
+            p.total += v.age;
+            p.average = p.total / p.count;
             return p;
         },
 
         function(p, v) {
-            if (v.gender === gender) {
-
-                p.count--;
-                p.total += v.age;
-                p.average = p.total / p.count;
-            }
-            else {
-                p.total -= v.age;
-                p.average = p.total / p.count;
-            }
+            p.count--;
+            p.total += v.age;
+            p.average = p.total / p.count;
             return p;
         },
 
@@ -125,8 +133,8 @@ function show_average_age_gender(ndx, gender, element) {
 function show_treatment_timeline(ndx) {
     var date_dim = ndx.dimension(dc.pluck('date'));
     var treatment_group = date_dim.group().reduce(
-         
-         function(p, v) {
+
+        function(p, v) {
             if (v.treatment === 'yes') {
                 p.count++;
                 p.total += v.treatment;
@@ -144,13 +152,13 @@ function show_treatment_timeline(ndx) {
             return { count: 0, total: 0 };
         }
     );
-    
-   
+
+
     var minDate = date_dim.bottom(1)[0].date;
     var maxDate = date_dim.top(1)[0].date;
 
     dc.lineChart("#treatment_timeline")
-    
+
         .width(1000)
         .height(300)
         .margins({ top: 10, right: 50, bottom: 30, left: 50 })
@@ -165,3 +173,119 @@ function show_treatment_timeline(ndx) {
         .yAxis().ticks(4);
 }
 
+function show_physical_impact(ndx) {
+
+    function physicalImpactByGender(dimension, physhealthconsequence) {
+
+        return dimension.group().reduce(
+
+            function(p, v) {
+                p.total++;
+                if (v.physhealthconsequence == physhealthconsequence) {
+                    p.match++;
+                }
+                return p;
+            },
+            function(p, v) {
+                p.total--;
+                if (v.physhealthconsequence == physhealthconsequence) {
+                    p.match--;
+                }
+                return p;
+            },
+            function() {
+                return { total: 0, match: 0 };
+            }
+        );
+    }
+
+    var dim = ndx.dimension(dc.pluck("gender"));
+    var physYes = physicalImpactByGender(dim, "Yes");
+    var physNo = physicalImpactByGender(dim, "No");
+    var physMaybe = physicalImpactByGender(dim, "Maybe");
+
+    dc.barChart("#physical_impact")
+        .width(400)
+        .height(300)
+        .dimension(dim)
+        .group(physYes, "Yes")
+        .stack(physNo, "No")
+        .stack(physMaybe, "Maybe")
+        .valueAccessor(function(d) {
+            if (d.value.total > 0) {
+                return (d.value.match / d.value.total) * 100;
+            }
+            else {
+                return 0;
+            }
+        })
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .legend(dc.legend().x(320).y(20).itemHeight(15).gap(5))
+        .margins({ top: 10, right: 100, bottom: 30, left: 30 });
+}
+
+function show_mental_impact(ndx) {
+
+    function mentalImpactByGender(dimension, mentalhealthconsequence) {
+
+        return dimension.group().reduce(
+
+            function(p, v) {
+                p.total++;
+                if (v.mentalhealthconsequence == mentalhealthconsequence) {
+                    p.match++;
+                }
+                return p;
+            },
+            function(p, v) {
+                p.total--;
+                if (v.mentalhealthconsequence == mentalhealthconsequence) {
+                    p.match--;
+                }
+                return p;
+            },
+            function() {
+                return { total: 0, match: 0 };
+            }
+        );
+    }
+
+    var dim = ndx.dimension(dc.pluck("gender"));
+    var mentYes = mentalImpactByGender(dim, "Yes");
+    var mentNo = mentalImpactByGender(dim, "No");
+    var mentMaybe = mentalImpactByGender(dim, "Maybe");
+
+    dc.barChart("#mental_impact")
+        .width(400)
+        .height(300)
+        .dimension(dim)
+        .group(mentYes, "Yes")
+        .stack(mentNo, "No")
+        .stack(mentMaybe, "Maybe")
+        .valueAccessor(function(d) {
+            if (d.value.total > 0) {
+                return (d.value.match / d.value.total) * 100;
+            }
+            else {
+                return 0;
+            }
+        })
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .legend(dc.legend().x(320).y(20).itemHeight(15).gap(5))
+        .margins({ top: 10, right: 100, bottom: 30, left: 30 });
+}
+
+function show_family_history(ndx) {
+
+    var dim = ndx.dimension(dc.pluck("familyhistory"));
+    var group = dim.group();
+
+    dc.pieChart('#family_history')
+        .height(200)
+        .radius(480)
+        .transitionDuration(500)
+        .dimension(dim)
+        .group(group);
+}
