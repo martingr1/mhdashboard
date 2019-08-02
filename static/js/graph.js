@@ -5,8 +5,6 @@ queue()
 function makeGraphs(error, healthData) {
 
     var ndx = crossfilter(healthData);
-    
-    console.log(healthData);
 
     var parseDate = d3.time.format("%d/%m/%Y").parse;
 
@@ -17,6 +15,7 @@ function makeGraphs(error, healthData) {
     })
 
     show_respondents(ndx);
+    show_tech_companies(ndx);
 
     show_average_age_gender(ndx, "Female", "#average_age_gender");
     show_average_age_gender(ndx, "Male", "#average_age_male");
@@ -37,13 +36,60 @@ function makeGraphs(error, healthData) {
 }
 
 function show_respondents(ndx) {
-    
-    var all = ndx.groupAll();
-    
-     dc.dataCount('#respondents_display')
-        .dimension(ndx)
-        .group(all);
+
+    var totalRecords = ndx.groupAll();
+
+    dc.numberDisplay('#respondents_display')
+        .formatNumber(d3.format(".0f"))
+        .valueAccessor(function(d) { return d++ })
+        .group(totalRecords);
 }
+
+function show_tech_companies(ndx) {
+
+    var totalRecords = ndx.groupAll().reduceCount(dc.pluck('techcompany'));
+
+    dc.numberDisplay('#tech_display')
+        .formatNumber(d3.format(".0f"))
+        .valueAccessor(function(d) { return d.techcompany === 'Yes'; })
+        .group(totalRecords);
+}
+
+function show_average_age_gender(ndx, gender, element) {
+    
+    var averageAgeByGender = ndx.groupAll().reduce(
+        function(p, v) {
+            p.count++;
+            p.total += v.age;
+            p.average = p.total / p.count;
+            return p;
+        },
+
+        function(p, v) {
+            p.count--;
+            p.total -= v.age;
+            p.average = p.total / p.count;
+            return p;
+        },
+
+        function() {
+            return { count: 0, total: 0, average: 0 };
+        },
+    );
+
+    dc.numberDisplay(element)
+        .formatNumber(d3.format(".0f"))
+        .valueAccessor(function(d) {
+            if (d.value == 0) {
+                return 0;
+            }
+            else {
+                return (d.total / d.count);
+            }
+        })
+        .group(averageAgeByGender);
+}
+
 
 function show_select_company(ndx) {
     var dim = ndx.dimension(dc.pluck("techcompany"));
@@ -96,55 +142,22 @@ function show_treatment_levels(ndx) {
         .xUnits(dc.units.ordinal)
 }
 
-function show_average_age_gender(ndx, gender, element) {
-    var averageAgeByGender = ndx.groupAll().reduce(
-        function(p, v) {
-            p.count++;
-            p.total += v.age;
-            p.average = p.total / p.count;
-            return p;
-        },
-
-        function(p, v) {
-            p.count--;
-            p.total += v.age;
-            p.average = p.total / p.count;
-            return p;
-        },
-
-        function() {
-            return { count: 0, total: 0, average: 0 };
-        },
-    );
-
-    dc.numberDisplay(element)
-        .formatNumber(d3.format(".0f"))
-        .valueAccessor(function(d) {
-            if (d.count == 0) {
-                return 0;
-            }
-            else {
-                return (d.total / d.count);
-            }
-        })
-        .group(averageAgeByGender);
-}
-
 function show_treatment_timeline(ndx) {
+    
     var date_dim = ndx.dimension(dc.pluck('date'));
     var treatment_group = date_dim.group().reduce(
 
         function(p, v) {
-            if (v.treatment === 'yes') {
+            if (v.treatment === 'Yes') {
                 p.count++;
                 p.total += v.treatment;
             }
             return p;
         },
         function(p, v) {
-            if (v.treatment === 'yes') {
+            if (v.treatment === 'Yes') {
                 p.count--;
-                p.total += v.treatment;
+                p.total -= v.treatment;
             }
             return p;
         },
@@ -152,7 +165,6 @@ function show_treatment_timeline(ndx) {
             return { count: 0, total: 0 };
         }
     );
-
 
     var minDate = date_dim.bottom(1)[0].date;
     var maxDate = date_dim.top(1)[0].date;
@@ -165,7 +177,7 @@ function show_treatment_timeline(ndx) {
         .dimension(date_dim)
         .group(treatment_group)
         .valueAccessor(function(d) {
-            return d.value.treatment;
+            return d.treatment === 'Yes';
         })
         .transitionDuration(500)
         .x(d3.time.scale().domain([minDate, maxDate]))
