@@ -47,11 +47,28 @@ function show_respondents(ndx) {
 
 function show_tech_companies(ndx) {
 
-    var totalRecords = ndx.groupAll().reduceCount(dc.pluck('techcompany'));
+    var totalRecords = ndx.groupAll().reduce(
+        
+        function (p,v) {
+            if (v.techcompany === 'Yes') {
+                p.count++;
+            }
+            return p;
+        },
+        function (p,v) {
+            if (v.techcompany === 'Yes') {
+                p.count--;
+            }
+            return p;
+        },
+        
+        function() {
+            return { count: 0 };
+        })
 
     dc.numberDisplay('#tech_display')
         .formatNumber(d3.format(".0f"))
-        .valueAccessor(function(d) { return d.techcompany === 'Yes'; })
+        .valueAccessor(function(d) { return d.count;})
         .group(totalRecords);
 }
 
