@@ -162,45 +162,40 @@ function show_treatment_levels(ndx) {
 function show_treatment_timeline(ndx) {
     
     var date_dim = ndx.dimension(dc.pluck('date'));
-    var treatment_group = date_dim.group().reduce(
-
-        function(p, v) {
-            if (v.treatment === 'Yes') {
+    var treatment_per_year = date_dim.group().reduce(
+        
+        function (p,v) {
+            if (v.techcompany === 'Yes') {
                 p.count++;
-                p.total += v.treatment;
             }
             return p;
         },
-        function(p, v) {
-            if (v.treatment === 'Yes') {
+        function (p,v) {
+            if (v.techcompany === 'Yes') {
                 p.count--;
-                p.total -= v.treatment;
             }
             return p;
         },
+        
         function() {
-            return { count: 0, total: 0 };
-        }
-    );
-
+            return { count: 0 };
+        });
+    
     var minDate = date_dim.bottom(1)[0].date;
     var maxDate = date_dim.top(1)[0].date;
-
-    dc.lineChart("#treatment_timeline")
-
-        .width(1000)
-        .height(300)
-        .margins({ top: 10, right: 50, bottom: 30, left: 50 })
-        .dimension(date_dim)
-        .group(treatment_group)
-        .valueAccessor(function(d) {
-            return d.treatment === 'Yes';
-        })
-        .transitionDuration(500)
-        .x(d3.time.scale().domain([minDate, maxDate]))
-        .xAxisLabel("Year")
-        .yAxis().ticks(4);
-}
+    
+    dc.lineChart ('#treatment_timeline')
+    .width(1200)
+    .height(400)
+    .margins({top: 50, right: 10, bottom: 50, left: 10})
+    .dimension(date_dim)
+    .group(treatment_per_year)
+    .valueAccessor(function(d) { return d.count;})
+    .transitionDuration(250)
+    .x(d3.time.scale().domain([minDate, maxDate]))
+    .xAxisLabel("Year")
+    .yAxis().ticks(100);
+} 
 
 function show_physical_impact(ndx) {
 
