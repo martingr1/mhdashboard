@@ -24,7 +24,7 @@
 <body class="background-image">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Mental Health in Tech</a> <button id="reset-dashboard" class="btn btn-sm btn-default">Reset<span class="hidden-xs"> All</span> Filters</button>
+        <a class="navbar-brand" href="#">Mental Health in Tech</a> <button id="reset_button" class="btn btn-sm btn-default">Reset<span class="hidden-xs"> All</span> Filters</button>
         </div>
     </nav>
 
@@ -36,12 +36,12 @@
                         <div class="row text-center chart-text">Introduction</div>
                         <hr class="line">
                         <div class="row text-center">
-                            <p class="chart-text">This dashboard contains data originally sourced via Kaggle and aims to analyse mental health in tech companies. The data visualisations below intend to give a brief overview of respondent data before analysing some of the trends
-                                contained within the data. </p>
+                            <p class="chart-text">This dashboard contains data originally sourced via Kaggle and aims to analyse mental health in tech companies. 
+                            The data visualisations below intend to give a brief overview of respondent data before analysing some of the trends
+                            contained within the data. </p>
                         </div>
-                        <hr class="line">
                         <div class="chart" id="select_company">
-                            <p class="chart-text">To get started, please select whether or not to view data for tech companies or non tech companies.</p>
+                            <p class="chart-text">To get started, please select whether or not to view data for tech companies, non tech companies or both.</p>
                         </div>
             </article>
             </div>
@@ -51,11 +51,8 @@
                     <div class="row no-gutters text-center">
                         <div class="row content-box">
                             <div class="row">
-                                <div class="text-center">Number of respondents</div>
+                                <div class="text-center">Total number of respondents</div>
                                 <hr class="line">
-                                <div>
-                                    <p class="chart-text"></p>
-                                </div>
                                 <div class="row">
                                     <div class="chart" id="respondents_display"></div>
                                 </div>
@@ -68,13 +65,10 @@
                     <div class="row no-gutters text-center">
                         <div class="row content-box">
                             <div class="row">
-                                <div class="text-center">Average Age</div><i class="fa fa-male fa-gender" aria-hidden="true"></i>
+                                <div class="text-center">Average Age of Male Respondents</div>
                                 <hr class="line">
-                                <div>
-                                    <p class="chart-text"></p>
-                                </div>
                                 <div class="row">
-                                    <div class="age_display" id="average_age_male"></div>
+                                    <i class="fa fa-male fa-gender" aria-hidden="true"></i><div class="age_display" id="average_age_male"></div>
                                 </div>
                             </div>
                         </div>
@@ -85,13 +79,10 @@
                     <div class="row no-gutters text-center">
                         <div class="row content-box">
                             <div class="row">
-                                <div class="text-center">Average Age</div><i class="fa fa-female fa-gender" aria-hidden="true"></i>
+                                <div class="text-center">Average Age of Female Respondents</div>
                                 <hr class="line">
-                                <div>
-                                    <p class="chart-text"></p>
-                                </div>
                                 <div class="row">
-                                    <div class="age_display" id="average_age_gender"></div>
+                                    <i class="fa fa-female fa-gender" aria-hidden="true"></i><div class="age_display" id="average_age_gender"></div>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +93,7 @@
                     <div class="row no-gutters text-center">
                         <div class="row content-box">
                             <div class="row">
-                                <div class="text-center">Number of Tech Companies</div><i class="fa fa-female fa-gender" aria-hidden="true"></i>
+                                <div class="text-center">Number of Tech Companies</div><i class="fas fa-microchip" aria-hidden="true"></i>
                                 <hr class="line">
                                 <div>
                                     <p class="chart-text"></p>
@@ -193,7 +184,10 @@
                         <div class="text-center">Physical Impact</div>
                         <hr class="line">
                         <div>
-                            <p class="chart-text"> </p>
+                            <p class="chart-text">Respondents were asked if they felt that discussing a physical health
+                            issue with their employer would have negative consequences.
+                            
+                            7% of women and 4% of men felt that there would.</p>
                         </div>
                         <div class="row">
                             <div class="chart" id="physical_impact"></div>
@@ -210,7 +204,12 @@
                         <div class="text-center">Mental Impact</div>
                         <hr class="line">
                         <div>
-                            <p class="chart-text"></p>
+                            <p class="chart-text">Respondents were asked if they felt that discussing a mental health
+                            issue with their employer would have negative consequences.
+                            
+                            27% of women and 22% of men felt that there would.
+                            
+                            This contrasts to the much lower numbers for physical health.</p>
                         </div>
                         <div class="row">
                             <div class="chart" id="mental_impact"></div>
@@ -227,7 +226,8 @@
                         <div class="text-center">Family History</div>
                         <hr class="line">
                         <div>
-                            <p class="chart-text"></p>
+                            <p class="chart-text">Of the total respondent count, 492 indicated that mental health issues
+                            had been prevalent in their family history.</p>
                         </div>
                         <div class="row">
                             <div class="chart" id="family_history"></div>
@@ -239,8 +239,8 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript"src="static/js/scripts.js"></script>
 </body>
 
 </html>
