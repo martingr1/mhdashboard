@@ -29,148 +29,179 @@
     </nav>
 
     <section class="section container-fluid">
-        <div class="row no-gutters">
-            <article class="article col-lg-12">
+        <article class="article col-lg-12">
+            <div class="row content-box">
+                <div class="row">Introduction</div>
+                <div>
+                    <hr class="line">
+                </div>
                 <div class="row text-center">
-                    <div class="row content-box">
-                        <div class="row text-center chart-text">Introduction</div>
-                        <hr class="line">
-                        <div class="row text-center">
-                            <p class="chart-text">This dashboard contains data originally sourced via Kaggle and aims to analyse mental health in tech companies. 
-                            The data visualisations below intend to give a brief overview of respondent data before analysing some of the trends
-                            contained within the data. </p>
-                        </div>
-                        <div class="chart" id="select_company">
-                            <p class="chart-text">To get started, please select whether or not to view data for tech companies, non tech companies or both.</p>
-                        </div>
-            </article>
+                    <p class="chart-text">This dashboard contains data originally sourced via Kaggle and aims to analyse mental health in tech companies.<br> The data visualisations below intend to give a brief overview of respondent data before analysing some of the trends
+                        contained within the data. </p>
+                </div>
+                <div class="" id="select_company">
+                    <p class="">To get started, please select whether or not to view data for tech companies, non tech companies or both.</p>
+                </div>
             </div>
-            <div class="row no-gutters">
-                <article class="article col-xs-12 col-sm-6 col-lg-3">
+        </article>
+        <div class="row no-gutters">
+            <article class="article col-xs-12 col-sm-6 col-lg-3">
 
-                    <div class="row no-gutters text-center">
-                        <div class="row content-box">
+                <div class="row no-gutters text-center">
+                    <div class="row content-box">
+                        <div class="row">
+                            <div class="text-center">Total number of respondents</div>
+                            <hr class="line">
                             <div class="row">
-                                <div class="text-center">Total number of respondents</div>
-                                <hr class="line">
-                                <div class="row">
-                                    <div class="chart" id="respondents_display"></div>
-                                </div>
+                                <div class="chart" id="respondents_display"></div>
                             </div>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="article col-xs-12 col-sm-6 col-lg-3">
-                    <div class="row no-gutters text-center">
-                        <div class="row content-box">
+            <article class="article col-xs-12 col-sm-6 col-lg-3">
+                <div class="row no-gutters text-center">
+                    <div class="row content-box">
+                        <div class="row">
+                            <div class="text-center">Average Age of Male Respondents</div>
+                            <hr class="line">
                             <div class="row">
-                                <div class="text-center">Average Age of Male Respondents</div>
-                                <hr class="line">
-                                <div class="row">
-                                    <i class="fa fa-male fa-gender" aria-hidden="true"></i><div class="age_display" id="average_age_male"></div>
-                                </div>
+                                <i class="fa fa-male fa-gender" aria-hidden="true"></i>
+                                <div class="age_display" id="average_age_male"></div>
                             </div>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="article col-xs-12 col-sm-6 col-lg-3">
-                    <div class="row no-gutters text-center">
-                        <div class="row content-box">
+            <article class="article col-xs-12 col-sm-6 col-lg-3">
+                <div class="row no-gutters text-center">
+                    <div class="row content-box">
+                        <div class="row">
+                            <div class="text-center">Average Age of Female Respondents</div>
+                            <hr class="line">
                             <div class="row">
-                                <div class="text-center">Average Age of Female Respondents</div>
-                                <hr class="line">
-                                <div class="row">
-                                    <i class="fa fa-female fa-gender" aria-hidden="true"></i><div class="age_display" id="average_age_gender"></div>
-                                </div>
+                                <i class="fa fa-female fa-gender" aria-hidden="true"></i>
+                                <div class="age_display" id="average_age_gender"></div>
                             </div>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="article col-xs-12 col-sm-6 col-lg-3">
+            <article class="article col-xs-12 col-sm-6 col-lg-3">
+                <div class="row no-gutters text-center">
+                    <div class="row content-box">
+                        <div class="row">
+                            <div class="text-center">Number of Tech Companies</div><i class="fas fa-microchip" aria-hidden="true"></i>
+                            <hr class="line">
+                            <div>
+                                <p class="chart-text"></p>
+                            </div>
+                            <div class="row">
+                                <div class="age_display" id="tech_display"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <div class="row">
+                <article class="article col-xs-12 col-sm-6 col-lg-4">
                     <div class="row no-gutters text-center">
                         <div class="row content-box">
                             <div class="row">
-                                <div class="text-center">Number of Tech Companies</div><i class="fas fa-microchip" aria-hidden="true"></i>
+                                <div class="text-center">Gender Breakdown</div>
                                 <hr class="line">
                                 <div>
-                                    <p class="chart-text"></p>
+                                    <p class="chart-text">Almost 75% of respondents identified as Male, compared to just under 25% for female.</p>
                                 </div>
                                 <div class="row">
-                                    <div class="age_display" id="tech_display"></div>
+                                    <div class="chart" id="gender_breakdown"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </article>
 
-                <div class="row">
-                    <article class="article col-xs-12 col-sm-6 col-lg-4">
-                        <div class="row no-gutters text-center">
-                            <div class="row content-box">
+                <article class="article col-xs-12 col-sm-6 col-lg-4">
+                    <div class="row no-gutters text-center">
+                        <div class="row content-box">
+                            <div class="row">
+                                <div class="text-center">Country Breakdown</div>
+                                <hr class="line">
+                                <div>
+                                    <p class="chart-text">Over 50% of respondents were from the US, with the UK next.</p>
+                                </div>
                                 <div class="row">
-                                    <div class="text-center">Gender Breakdown</div>
-                                    <hr class="line">
-                                    <div>
-                                        <p class="chart-text">Almost 75% of respondents identified as Male, compared to just under 25% for female.</p>
-                                    </div>
-                                    <div class="row">
-                                        <div class="chart" id="gender_breakdown"></div>
-                                    </div>
+                                    <div class="chart country-pie" id="country_breakdown"></div>
                                 </div>
                             </div>
                         </div>
-                    </article>
+                    </div>
+                </article>
 
-                    <article class="article col-xs-12 col-sm-6 col-lg-4">
-                        <div class="row no-gutters text-center">
-                            <div class="row content-box">
+                <article class="article col-xs-12 col-sm-6 col-lg-4">
+                    <div class="row no-gutters text-center">
+                        <div class="row content-box">
+                            <div class="row">
+                                <div class="text-center">Treatment</div>
+                                <hr class="line">
+                                <div>
+                                    <p class="chart-text">Split between those having requested treatment and not is almost 50/50.</p>
+                                </div>
                                 <div class="row">
-                                    <div class="text-center">Country Breakdown</div>
-                                    <hr class="line">
-                                    <div>
-                                        <p class="chart-text">Over 50% of respondents were from the US, with the UK next.</p>
-                                    </div>
-                                    <div class="row">
-                                        <div class="chart" id="country_breakdown"></div>
-                                    </div>
+                                    <div class="chart" id="treatment_chart"></div>
                                 </div>
                             </div>
                         </div>
-                    </article>
-
-                    <article class="article col-xs-12 col-sm-6 col-lg-4">
-                        <div class="row no-gutters text-center">
-                            <div class="row content-box">
-                                <div class="row">
-                                    <div class="text-center">Treatment</div>
-                                    <hr class="line">
-                                    <div>
-                                        <p class="chart-text">Split between those having requested treatment and not is almost 50/50.</p>
-                                    </div>
-                                    <div class="row">
-                                        <div class="chart" id="treatment_chart"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+                    </div>
+                </article>
+            </div>
 
     </section>
 
     <div class="row">
-        <article class="article col-lg-12">
+        <article class="article col-sm-12 col-md-6 col-lg-4">
             <div class="row text-center">
                 <div class="row content-box">
-                    <div class="row text-center chart-text">Treatment Levels Over Time</div>
+                    <div class="row text-center chart-text">Treatment by Gender</div>
+                    <hr class="line">
+                    <div class="row text-center">
+                        <p class="chart-text">70% of female respondents and 45% of male respondents indicated that they had previously asked for treatment for a mental health issue, as did 85% of those who identified in the 'Other' category. </p>
+                    </div>
+                    <div class="chart" id="treatment_by_gender"></div>
+                </div>
+            </div>
+        </article>
+
+        <article class="article col-sm-12 col-md-6 col-lg-4">
+            <div class="row text-center">
+                <div class="row content-box">
+                    <div class="row text-center chart-text">Treatment by Family History</div>
                     <hr class="line">
                     <div class="row text-center">
                         <p class="chart-text"> </p>
                     </div>
-                    <div class="chart" id="treatment_timeline"></div>
+                    <div class="chart" id="family_history_treatment"></div>
+                </div>
+            </div>
+        </article>
+
+        <article class="article col-xs-12 col-sm-6 col-lg-4">
+            <div class="row no-gutters text-center">
+                <div class="row content-box">
+                    <div class="row">
+                        <div class="text-center">Family History</div>
+                        <hr class="line">
+                        <div>
+                            <p class="chart-text">Of the total respondent count, 492 indicated that mental health issues had been prevalent in their family history.</p>
+                        </div>
+                        <div class="row">
+                            <div class="chart" id="family_history"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </article>
@@ -184,10 +215,7 @@
                         <div class="text-center">Physical Impact</div>
                         <hr class="line">
                         <div>
-                            <p class="chart-text">Respondents were asked if they felt that discussing a physical health
-                            issue with their employer would have negative consequences.
-                            
-                            7% of women and 4% of men felt that there would.</p>
+                            <p class="chart-text">Respondents were asked if they felt that discussing a physical health issue with their employer would have negative consequences. 7% of women and 4% of men felt that there would.</p>
                         </div>
                         <div class="row">
                             <div class="chart" id="physical_impact"></div>
@@ -204,12 +232,8 @@
                         <div class="text-center">Mental Impact</div>
                         <hr class="line">
                         <div>
-                            <p class="chart-text">Respondents were asked if they felt that discussing a mental health
-                            issue with their employer would have negative consequences.
-                            
-                            27% of women and 22% of men felt that there would.
-                            
-                            This contrasts to the much lower numbers for physical health.</p>
+                            <p class="chart-text">Respondents were asked if they felt that discussing a mental health issue with their employer would have negative consequences. 27% of women and 22% of men felt that there would. This contrasts to the much lower numbers for
+                                physical health.</p>
                         </div>
                         <div class="row">
                             <div class="chart" id="mental_impact"></div>
@@ -226,8 +250,7 @@
                         <div class="text-center">Family History</div>
                         <hr class="line">
                         <div>
-                            <p class="chart-text">Of the total respondent count, 492 indicated that mental health issues
-                            had been prevalent in their family history.</p>
+                            <p class="chart-text">Of the total respondent count, 492 indicated that mental health issues had been prevalent in their family history.</p>
                         </div>
                         <div class="row">
                             <div class="chart" id="family_history"></div>
@@ -240,7 +263,7 @@
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script type="text/javascript"src="static/js/scripts.js"></script>
+    <script type="text/javascript" src="static/js/scripts.js"></script>
 </body>
 
 </html>

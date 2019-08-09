@@ -1,17 +1,5 @@
-background-image {
+.background-image {
 	background-image: url("static/images/clouds_sunset_sky_119785_3840x2400.jpg");
-}
-
-.intro-box {
-	box-sizing: border-box;
-	border-radius: 20px;
-	background-color: #D3D3D3;
-	opacity: 0.9;
-	display: flex;
-	width: 100%;
-	height: auto;
-	margin: 25px;
-	padding: 25px;
 }
 
 .content-box {
@@ -20,6 +8,7 @@ background-image {
 	background-color: #D3D3D3;
 	opacity: 0.9;
 	display: flex;
+	flex-wrap: wrap;
 	width: 100%;
 	height: auto;
 	margin: 25px;
@@ -29,18 +18,21 @@ background-image {
 .chart {
 	height: auto;
 	margin: 25px;
-	padding: 25px;
 }
 
 .chart-text {
 	font-size: medium;
 	color: black;
 	margin: 10px;
-	padding: 10px;
 }
 
 .line {
 	margin: 15px auto 15px;
-	color: #FFFFFF;
-	max-width: 75%;
+	padding: 15px;
+	color: #000000;
+	width: 75%;
+}
+
+.country-pie {
+	margin-left: 100px;
 }

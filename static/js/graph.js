@@ -25,11 +25,13 @@ function makeGraphs(error, healthData) {
     show_country_breakdown(ndx);
     show_treatment_levels(ndx);
 
-    show_treatment_timeline(ndx);
+    show_treatment_by_gender(ndx);
+    show_family_history(ndx);
+    show_family_history_treatment(ndx);
 
     show_physical_impact(ndx);
     show_mental_impact(ndx);
-    show_family_history(ndx);
+
 
 
     dc.renderAll();
@@ -48,32 +50,32 @@ function show_respondents(ndx) {
 function show_tech_companies(ndx) {
 
     var totalRecords = ndx.groupAll().reduce(
-        
-        function (p,v) {
+
+        function(p, v) {
             if (v.techcompany === 'Yes') {
                 p.count++;
             }
             return p;
         },
-        function (p,v) {
+        function(p, v) {
             if (v.techcompany === 'Yes') {
                 p.count--;
             }
             return p;
         },
-        
+
         function() {
             return { count: 0 };
         })
 
     dc.numberDisplay('#tech_display')
         .formatNumber(d3.format(".0f"))
-        .valueAccessor(function(d) { return d.count;})
+        .valueAccessor(function(d) { return d.count; })
         .group(totalRecords);
 }
 
 function show_average_age_gender(ndx, gender, element) {
-    
+
     var averageAgeByGender = ndx.groupAll().reduce(
         function(p, v) {
             p.count++;
@@ -101,7 +103,7 @@ function show_average_age_gender(ndx, gender, element) {
                 return 0;
             }
             else {
-                return (d.total / d.count);
+                return (d.average);
             }
         })
         .group(averageAgeByGender);
@@ -137,9 +139,9 @@ function show_country_breakdown(ndx) {
 
     dc.pieChart('#country_breakdown')
         .height(200)
-        .radius(480)
+        .radius(400)
         .transitionDuration(500)
-        .legend(dc.legend().x(320).y(20).itemHeight(15).gap(5))
+        .legend(dc.legend().x(-5).y(20).itemHeight(10).gap(10))
         .dimension(dim)
         .group(group);
 }
@@ -160,42 +162,142 @@ function show_treatment_levels(ndx) {
 }
 
 function show_treatment_timeline(ndx) {
-    
+
+
     var date_dim = ndx.dimension(dc.pluck('date'));
-    var treatment_per_year = date_dim.group().reduce(
-        
-        function (p,v) {
-            if (v.techcompany === 'Yes') {
+    var total_treatment_per_date = date_dim.group().reduceSum(dc.pluck('treatment'));
+
+    var minDate = date_dim.bottom(1)[0].date;
+    var maxDate = date_dim.top(1)[0].date;
+
+    dc.lineChart("#treatment_timeline")
+        .width(1000)
+        .height(300)
+        .margins({ top: 10, right: 50, bottom: 30, left: 50 })
+        .dimension(date_dim)
+        .group(total_treatment_per_date)
+        .valueAccessor(function(d) {
+            if (d.value == 'No') {
+                return 0;
+            }
+            else {
+                return (d.value.treatment);
+            }
+        })
+        .transitionDuration(500)
+        .x(d3.time.scale().domain([minDate, maxDate]))
+        .xAxisLabel("Year")
+        .yAxis().ticks(4);
+}
+
+
+/* function(p, v) {
+
+            if (v.techcompany === v.techcompany && v.techcompany === 'Yes') {
                 p.count++;
             }
             return p;
         },
-        function (p,v) {
-            if (v.techcompany === 'Yes') {
+        function(p, v) {
+            
+            if (v.techcompany === v.techcompany && v.techcompany === 'No') {
                 p.count--;
+            }
+            else {
+                p.count++;
             }
             return p;
         },
-        
+
+        function() {
+            return { count: 0 };
+        }) */
+
+function show_treatment_by_gender(ndx) {
+
+    function genderTreatment(dimension, treatment) {
+
+        return dimension.group().reduce(
+
+            function(p, v) {
+                p.total++;
+                if (v.treatment == treatment) {
+                    p.match++;
+                }
+                return p;
+            },
+            function(p, v) {
+                p.total--;
+                if (v.treatment == treatment) {
+                    p.match--;
+                }
+                return p;
+            },
+            function() {
+                return { total: 0, match: 0 };
+            }
+        );
+    }
+
+    var dim = ndx.dimension(dc.pluck("gender"));
+    var treatYes = genderTreatment(dim, "Yes");
+    var treatNo = genderTreatment(dim, "No");
+
+    dc.barChart("#treatment_by_gender")
+        .width(300)
+        .height(300)
+        .dimension(dim)
+        .group(treatYes, "Yes")
+        .stack(treatNo, "No")
+        .valueAccessor(function(d) {
+            if (d.value.total > 0) {
+                return (d.value.match / d.value.total) * 100;
+            }
+            else {
+                return 0;
+            }
+        })
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .legend(dc.legend().x(260).y(20).itemHeight(15).gap(5))
+        .margins({ top: 10, right: 100, bottom: 30, left: 30 });
+}
+
+
+function show_family_history_treatment(ndx) {
+
+    var treatment_dim = ndx.dimension(dc.pluck("treatment"));
+    var family_history_group = treatment_dim.group().reduce(
+
+        function(p, v) {
+            if (v.familyhistory == 'Yes') {
+                p.count++;
+            }
+            return p;
+        },
+        function(p, v) {
+            if (v.familyhistory == 'No') {
+                p.count--;
+            } else {
+                return p;
+            } 
+        },
+
         function() {
             return { count: 0 };
         });
-    
-    var minDate = date_dim.bottom(1)[0].date;
-    var maxDate = date_dim.top(1)[0].date;
-    
-    dc.lineChart ('#treatment_timeline')
-    .width(1200)
-    .height(400)
-    .margins({top: 50, right: 10, bottom: 50, left: 10})
-    .dimension(date_dim)
-    .group(treatment_per_year)
-    .valueAccessor(function(d) { return d.count;})
-    .transitionDuration(250)
-    .x(d3.time.scale().domain([minDate, maxDate]))
-    .xAxisLabel("Year")
-    .yAxis().ticks(100);
-} 
+
+    dc.barChart('#family_history_treatment')
+        .width(300)
+        .height(300)
+        .dimension(treatment_dim)
+        .group(family_history_group)
+        .valueAccessor(function(d) { return d.count; })
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .margins({ top: 10, right: 100, bottom: 30, left: 30 });
+}
+
 
 function show_physical_impact(ndx) {
 
