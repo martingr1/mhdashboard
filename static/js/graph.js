@@ -6,35 +6,72 @@ function makeGraphs(error, healthData) {
 
     var ndx = crossfilter(healthData);
 
-    var parseDate = d3.time.format("%d/%m/%Y").parse;
-
-
     healthData.forEach(function(d) {
         d.age = parseInt(d.age);
-        d.date = parseDate(d.date);
     })
-
+    
+    show_select_company(ndx);
+    show_select_gender(ndx);
+    show_select_date(ndx);
+    show_select_worktype(ndx);
+    
+    
     show_respondents(ndx);
     show_tech_companies(ndx);
 
     show_average_age_gender(ndx, "Female", "#average_age_gender");
     show_average_age_gender(ndx, "Male", "#average_age_male");
 
-    show_select_company(ndx);
+    
     show_gender_breakdown(ndx);
     show_country_breakdown(ndx);
     show_treatment_levels(ndx);
+    show_age_breakdown(ndx);
 
     show_treatment_by_gender(ndx);
     show_family_history(ndx);
-    show_family_history_treatment(ndx);
 
     show_physical_impact(ndx);
     show_mental_impact(ndx);
-
-
+    show_wellness_program(ndx);
 
     dc.renderAll();
+}
+
+function show_select_company(ndx) {
+    var dim = ndx.dimension(dc.pluck("techcompany"));
+    var group = dim.group();
+
+    dc.selectMenu("#select_company")
+        .dimension(dim)
+        .group(group);
+}
+
+function show_select_gender(ndx) {
+    var dim = ndx.dimension(dc.pluck("gender"));
+    var group = dim.group();
+
+    dc.selectMenu("#select_gender")
+        .dimension(dim)
+        .group(group);
+}
+
+function show_select_date(ndx) {
+    var dim = ndx.dimension(dc.pluck("date"));
+    var group = dim.group();
+
+    dc.selectMenu("#select_date")
+        .dimension(dim)
+        .group(group);
+}
+
+function show_select_worktype(ndx) {
+    var dim = ndx.dimension(dc.pluck("selfemployed"));
+    var group = dim.group();
+
+    dc.selectMenu("#select_worktype")
+        .dimension(dim)
+        .group(group);
 }
 
 function show_respondents(ndx) {
@@ -109,16 +146,6 @@ function show_average_age_gender(ndx, gender, element) {
         .group(averageAgeByGender);
 }
 
-
-function show_select_company(ndx) {
-    var dim = ndx.dimension(dc.pluck("techcompany"));
-    var group = dim.group();
-
-    dc.selectMenu("#select_company")
-        .dimension(dim)
-        .group(group);
-}
-
 function show_gender_breakdown(ndx) {
 
     var dim = ndx.dimension(dc.pluck("gender"));
@@ -146,6 +173,42 @@ function show_country_breakdown(ndx) {
         .group(group);
 }
 
+function show_age_breakdown(ndx) {
+
+    var age_dimension = ndx.dimension(function(d) {
+
+        if (d.age >= 18 && d.age <= 24) {
+
+            return "18-24";
+        }
+
+        else if (d.age > 24 && d.age <= 39) {
+
+            return "25-39";
+        }
+
+        else if (d.age >= 40 && d.age <= 49) {
+
+            return "40-49";
+        }
+
+        else if (d.age > 50) {
+
+            return "50+";
+        }
+    });
+
+    var age_group = age_dimension.group();
+    dc.barChart('#age_breakdown')
+        .width(300)
+        .height(200)
+        .margins({ top: 10, right: 50, bottom: 30, left: 50 })
+        .dimension(age_dimension)
+        .group(age_group)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+}
+
 function show_treatment_levels(ndx) {
 
     var dim = ndx.dimension(dc.pluck("treatment"));
@@ -160,58 +223,6 @@ function show_treatment_levels(ndx) {
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
 }
-
-function show_treatment_timeline(ndx) {
-
-
-    var date_dim = ndx.dimension(dc.pluck('date'));
-    var total_treatment_per_date = date_dim.group().reduceSum(dc.pluck('treatment'));
-
-    var minDate = date_dim.bottom(1)[0].date;
-    var maxDate = date_dim.top(1)[0].date;
-
-    dc.lineChart("#treatment_timeline")
-        .width(1000)
-        .height(300)
-        .margins({ top: 10, right: 50, bottom: 30, left: 50 })
-        .dimension(date_dim)
-        .group(total_treatment_per_date)
-        .valueAccessor(function(d) {
-            if (d.value == 'No') {
-                return 0;
-            }
-            else {
-                return (d.value.treatment);
-            }
-        })
-        .transitionDuration(500)
-        .x(d3.time.scale().domain([minDate, maxDate]))
-        .xAxisLabel("Year")
-        .yAxis().ticks(4);
-}
-
-
-/* function(p, v) {
-
-            if (v.techcompany === v.techcompany && v.techcompany === 'Yes') {
-                p.count++;
-            }
-            return p;
-        },
-        function(p, v) {
-            
-            if (v.techcompany === v.techcompany && v.techcompany === 'No') {
-                p.count--;
-            }
-            else {
-                p.count++;
-            }
-            return p;
-        },
-
-        function() {
-            return { count: 0 };
-        }) */
 
 function show_treatment_by_gender(ndx) {
 
@@ -262,42 +273,6 @@ function show_treatment_by_gender(ndx) {
         .legend(dc.legend().x(260).y(20).itemHeight(15).gap(5))
         .margins({ top: 10, right: 100, bottom: 30, left: 30 });
 }
-
-
-function show_family_history_treatment(ndx) {
-
-    var treatment_dim = ndx.dimension(dc.pluck("treatment"));
-    var family_history_group = treatment_dim.group().reduce(
-
-        function(p, v) {
-            if (v.familyhistory == 'Yes') {
-                p.count++;
-            }
-            return p;
-        },
-        function(p, v) {
-            if (v.familyhistory == 'No') {
-                p.count--;
-            } else {
-                return p;
-            } 
-        },
-
-        function() {
-            return { count: 0 };
-        });
-
-    dc.barChart('#family_history_treatment')
-        .width(300)
-        .height(300)
-        .dimension(treatment_dim)
-        .group(family_history_group)
-        .valueAccessor(function(d) { return d.count; })
-        .x(d3.scale.ordinal())
-        .xUnits(dc.units.ordinal)
-        .margins({ top: 10, right: 100, bottom: 30, left: 30 });
-}
-
 
 function show_physical_impact(ndx) {
 
@@ -414,4 +389,18 @@ function show_family_history(ndx) {
         .transitionDuration(500)
         .dimension(dim)
         .group(group);
+}
+
+function show_wellness_program(ndx) {
+    
+    var wellnessprogram_dim = ndx.dimension(dc.pluck("wellnessprogram"));
+    
+    var wh_group = wellnessprogram_dim.group();
+    
+    dc.pieChart('#wellness_chart')
+        .height(200)
+        .radius(480)
+        .transitionDuration(500)
+        .dimension(wellnessprogram_dim)
+        .group(wh_group);
 }
