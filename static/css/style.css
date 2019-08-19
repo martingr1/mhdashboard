@@ -1,5 +1,5 @@
-.background-image {
-	background-image: url("static/images/clouds_sunset_sky_119785_3840x2400.jpg");
+body {
+  background-image: url("../images/clouds_background.png");
 }
 
 .btn {
@@ -8,47 +8,37 @@
 }
 
 .filter {
-	margin: 10px;
-	padding: 10px;
+	padding-top: 2.5px;
 }
 
 .header {
-
-	position: relative;
 	margin: auto;
 	text-align: center;
 	padding: 5px;
-
-}
-
-.sub-header {
-	margin: auto;
-	padding: 10px;
 }
 
 .chart-text {
 	font-size: medium;
 	color: black;
-	padding-right: 25px;
-	margin: 10px;
+	margin: 5px 5px 10px 5px;
 }
 
 .line {
-	margin: 15px auto 15px;
-	color: #000000;
+	margin: 5px auto 5px;
+	color: #ffffff;
 	width: 75%;
 }
 
 .content-box {
-
 	box-sizing: border-box;
-	border-radius: 20px;
-	background-color: #D3D3D3;
-	opacity: 0.9;
+	border-radius: 25px;
+	background-color: #FFFFF0;
+	opacity: 0.8;
+	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	margin: 10px;
-	padding: 10px;
+	padding: 15px;
 }
 
 .number-display {
@@ -61,19 +51,12 @@
 
 }
 
-.fa-gender {}
+.page-footer {
+	background-color: #D3D3D3;
+	width: 100%;
+	opacity: 0.75;
+}
 
 .chart {
-	height: auto;
-	margin: 25px;
+	margin: auto;
 }
-
-
-
-
-
-
-.country-pie {
-	margin-left: 100px;
-}
-

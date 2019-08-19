@@ -460,7 +460,7 @@ age,date,gender,country,selfemployed,familyhistory,treatment,workinterfere,remot
 32,2015,Male,United Kingdom,No,No,No,Never,No,Yes,No,No,No,No,Unsure,Unsure,Maybe,No,Some of them,No,No,Yes,Yes,No
 37,2015,Male,United States,No,No,No,No,No,Yes,Yes,No,No,No,Unsure,Unsure,Maybe,Maybe,Some of them,Some,No,No,Unsure,No
 29,2015,Male,United Kingdom,No,No,No,No,No,Yes,Unsure,No,Unsure,Unsure,Unsure,Unsure,No,No,Some of them,Yes,Maybe,Maybe,Yes,No
-33,2015,Female ,United States,No,No,No,Never,No,Yes,Yes,Unsure,Yes,Yes,Unsure,Very easy,Maybe,No,Some of them,Yes,No,No,Yes,No
+33,2015,Female,United States,No,No,No,Never,No,Yes,Yes,Unsure,Yes,Yes,Unsure,Very easy,Maybe,No,Some of them,Yes,No,No,Yes,No
 28,2015,Male,United States,No,No,No,Sometimes,Yes,Yes,No,Yes,No,No,Unsure,Somewhat easy,Yes,Maybe,Some of them,No,No,No,Unsure,No
 26,2015,Female,United States,No,Yes,No,Never,No,Yes,Unsure,Unsure,No,No,Unsure,Somewhat difficult,Maybe,Maybe,Some of them,No,No,Maybe,No,No
 27,2015,Male,United States,No,Yes,Yes,Sometimes,Yes,Yes,Unsure,No,Yes,Unsure,Unsure,Somewhat easy,Yes,No,Some of them,Yes,No,Maybe,Yes,No
@@ -952,7 +952,7 @@ age,date,gender,country,selfemployed,familyhistory,treatment,workinterfere,remot
 34,2018,Male,Netherlands,No,No,Yes,Rarely,No,Yes,No,Yes,No,No,Yes,Very easy,No,No,Yes,Yes,Maybe,Maybe,Yes,No
 24,2018,Male,United Kingdom,No,Yes,Yes,Often,No,No,Unsure,Yes,No,No,No,Somewhat easy,Yes,Maybe,Some of them,Yes,No,Maybe,No,Yes
 61,2018,Male,South Africa,Yes,No,Yes,Sometimes,Yes,Yes,No,No,No,No,Unsure,Very difficult,Yes,Maybe,Some of them,Yes,No,Maybe,No,Yes
-36,2018,Female ,United States,No,Yes,Yes,Rarely,No,Yes,Unsure,No,No,Unsure,Unsure,Unsure,Yes,Maybe,Some of them,No,No,No,Unsure,No
+36,2018,Female,United States,No,Yes,Yes,Rarely,No,Yes,Unsure,No,No,Unsure,Unsure,Unsure,Yes,Maybe,Some of them,No,No,No,Unsure,No
 38,2018,Male,United States,No,No,No,No,No,Yes,No,No,No,No,Yes,Unsure,Maybe,No,Some of them,Yes,Maybe,Maybe,Unsure,No
 33,2018,Male,Germany,No,Yes,Yes,Often,No,Yes,Unsure,Unsure,Yes,No,Yes,Somewhat easy,No,No,Some of them,Yes,Yes,Yes,Yes,No
 30,2018,Male,United States,No,Yes,No,Never,No,No,Unsure,No,No,Unsure,Unsure,Unsure,Yes,Maybe,No,No,No,No,No,No

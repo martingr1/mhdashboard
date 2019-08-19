@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/dc.min.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="static/css/style.css" type="text/css" />
 
 
@@ -21,132 +21,118 @@
 
 </head>
 
-<body class="">
+<body>
 
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container-fluid">
+    <nav class="container-fluid navbar sticky-top navbar-dark bg-primary justify-content-center">
+        <div class="container">
             <a class="navbar-brand" href="#">Mental Health in Tech</a> <button id="reset_button" class="btn btn-sm btn-default">Reset Dashboard Filters</button>
         </div>
     </nav>
 
-    <section class="container">
-
-        <section class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="content-box col-xs-12 col-sm-12">
-                        <h3 class="header">Introduction</h3>
-                        <div class="row no-gutters">
-                            <hr class="line">
-                            <p class="chart-text">This dashboard contains data originally sourced via Kaggle and aims to analyse mental health in tech companies.<br></p>
-                            <p class="chart-text">The data visualisations below intend to give a brief overview of respondent data before analysing some of the trends contained within the data. The original dataset can be found here <a href="https://www.kaggle.com/osmi/mental-health-in-tech-survey">Kaggle</a>.<br></p>
-                            <p class="chart-text">To get started, please filter the data using one of the selections below.</p>
-                        </div>
-                        <div class="row no-gutters">
-                            <h6 class="sub-header">Tech Company:</h6>
-                            <span class="filter" id="select_company"></span>
-                        </div>
-                        <div class="row no-gutters">
-                            <h6 class="sub-header">Gender:</h6>
-                            <span class="filter" id="select_gender"></span>
-                        </div>
-                        <div class="row no-gutters">
-                            <h6 class="sub-header">Date:</h6>
-                            <span class="filter" id="select_date"></span>
-                        </div>
-                        <div class="row no-gutters">
-                            <h6 class="sub-header">Self Employed:</h6>
-                            <span class="filter" id="select_worktype"></span>
-                        </div>
-                    </div>
-                </div>
-        </section>
-        <section class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="content-box col-xs-12 col-sm-12 col-md-3">
-                        <div class="row no-gutters">
-                            <h5 class="sub-header">Respondents</h5>
-                        </div>
+    <div class="container">
+        <section class="container">
+            <div class="col-xs-12">
+                <div class="content-box">
+                    <h3 class="header">Introduction</h3>
+                    <div class="row">
                         <hr class="line">
+                        <p class="chart-text">This dashboard contains data originally sourced via Kaggle and aims to analyse mental health in tech companies.<br></p>
+                        <p class="chart-text">The data visualisations below intend to give a brief overview of respondent data before analysing some of the trends contained within the data. The original dataset can be found here <a href="https://www.kaggle.com/osmi/mental-health-in-tech-survey">Kaggle</a>.<br></p>
+                        <p class="chart-text">To get started, please filter the data using one of the selections below.</p>
+                    </div>
+                    <div class="container">
                         <div class="row">
-                            <div class="chart" id="respondents_display"></div>
-                        </div>
-                    </div>
-
-                    <div class="content-box col-xs-12 col-sm-12 col-md-3">
-                        <div class="row no-gutters">
-                            <h5>Average Age<i class="icon fa fa-male" aria-hidden="true"></i></h5>
-                        </div>
-                        <hr class="line">
-                        <div class="row no-gutters">
-                            <div class="chart" id="average_age_male"></div>
-                        </div>
-                    </div>
-
-                    <div class="content-box col-xs-12 col-sm-12 col-md-3">
-                        <div class="row no-gutters">
-                            <h6>Average Age <i class="icon fa fa-female" aria-hidden="true"></i></h6>
-                        </div>
-                        <hr class="line">
-                        <div class="row no-gutters">
-                            <div class="chart" id="average_age_gender"></div>
-                        </div>
-                    </div>
-
-                    <div class="content-box col-xs-12 col-sm-12 col-md-3">
-                        <div class="row no-gutters">
-                            <h6>Tech Companies</h6>
-                        </div>
-                        <hr class="line">
-                        <div class="row no-gutters">
-                            <div class="chart" id="tech_display"></div>
+                            <div class="row col-xs-12 col-md-4">
+                                <h6 class="header">Tech Company:</h6>
+                                <span class="filter" id="select_company"></span>
+                            </div>
+                            <div class="row col-xs-12 col-md-4">
+                                <h6 class="header">Gender:</h6>
+                                <span class="filter" id="select_gender"></span>
+                            </div>
+                            <div class="row col-xs-12 col-md-4">
+                                <h6 class="header">Date:</h6>
+                                <span class="filter" id="select_date"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="content-box col-xs-12 col-sm-12 col-md-4">
-                        <div class="row no-gutters">
-                            <h6>Gender Breakdown
-                                <h6>
+        <section class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-3">
+                    <div class="content-box">
+                        <h5 class="header">Respondents</h5>
+                        <hr class="line">
+                        <div class="row number-display">
+                            <div id="respondents_display"></div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <div class="content-box">
+                        <h5 class="header">Average Age Male</h5>
+                        <hr class="line">
+                        <div class="row number-display">
+                            <div id="average_age_male"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <div class="content-box">
+                        <h5 class="header">Average Age Female</h5>
+                        <hr class="line">
+                        <div class="row number-display">
+                            <div id="average_age_gender"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-3">
+                    <div class="content-box">
+                        <h5 class="header">Tech Companies</h5>
+                        <hr class="line">
+                        <div class="row number-display">
+                            <div id="tech_display"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-4">
+                    <div class="content-box">
+                        <h5 class="header">Gender Breakdown</h5>
                         <hr class="line">
                         <p class="chart-text">Almost 75% of respondents identified as Male, compared to just under 25% for female.</p>
-                        <div class="row no-gutters">
-                            <div class="chart" id="gender_breakdown"></div>
+                        <div class="row chart">
+                            <div id="gender_breakdown"></div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="content-box col-xs-12 col-sm-12 col-md-4">
-                        <div class="row no-gutters">
-                            <div class="row no-gutters">
-                                <h6>Country Breakdown
-                                    <h6>
-                            </div>
-                            <hr class="line">
-                            <p class="chart-text">Over 50% of respondents were from the US, with the UK the next largest proportion.</p>
-                            <div class="row no-gutters">
-                                <div class="chart country-pie" id="country_breakdown"></div>
-                            </div>
+                <div class="col-xs-12 col-sm-12 col-lg-4">
+                    <div class="content-box">
+                        <h5 class="header">Country Breakdown</h5>
+                        <hr class="line">
+                        <p class="chart-text">Over 50% of respondents were from the US, with the UK the next largest proportion.</p>
+                        <div class="row chart">
+                            <div id="country_breakdown"></div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="content-box col-xs-12 col-sm-12 col-md-4">
-                        <div class="row no-gutters">
-                            <div class="row no-gutters">
-                                <h6>Age Breakdown
-                                    <h6>
-                            </div>
-                            <hr class="line">
-                            <p class="chart-text">Of the total count, most respondents came from the 24-49 category (920).</p>
-                            <div class="row no-gutters">
-                                <div class="chart" id="age_breakdown"></div>
-                            </div>
+                <div class="col-xs-12 col-sm-12 col-lg-4">
+                    <div class="content-box">
+                        <h5 class="header">Age Breakdown</h5>
+                        <hr class="line">
+                        <p class="chart-text">Of the total count, most respondents came from the 24-39 category (920).<br> There were 26 rspondents from the 50+ category making it the least represented.</p>
+                        <div class="row chart">
+                            <div id="age_breakdown"></div>
                         </div>
                     </div>
                 </div>
@@ -154,108 +140,102 @@
         </section>
 
 
-        <div class="row">
-            <article class="article col-sm-12 col-md-6 col-lg-4">
-                <div class="row text-center">
-                    <div class="row content-box">
-                        <div class="row text-center chart-text">Treatment by Gender</div>
+        <section class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-4">
+                    <div class="content-box">
+
+                        <h5 class="header">Treatment by Gender</h5>
+
                         <hr class="line">
-                        <div class="row text-center">
-                            <p class="chart-text">70% of female respondents and 45% of male respondents indicated that they had previously asked for treatment for a mental health issue, as did 85% of those who identified in the 'Other' category. </p>
+                        <p class="chart-text">70% of female respondents and 45% of male respondents indicated that they had previously asked for treatment for a mental health issue, as did 85% of those who identified in the 'Other' category. </p>
+                        <div class="row chart">
+                            <div id="treatment_by_gender"></div>
                         </div>
-                        <div class="chart" id="treatment_by_gender"></div>
                     </div>
                 </div>
-            </article>
+                <div class="col-xs-12 col-sm-12 col-lg-4">
+                    <div class="content-box">
 
-            <article class="article col-sm-12 col-md-6 col-lg-4">
-                <div class="row text-center">
-                    <div class="row content-box">
-                        <div class="row text-center chart-text">Treatment Levels</div>
+                        <h5 class="header">Treatment Levels</h5>
+
                         <hr class="line">
-                        <div class="row text-center">
-                            <p class="chart-text">There is a near 50/50 split between respondents that had previously sought help for mental health issues and those that hadn't.</p>
-                        </div>
-                        <div class="chart" id="treatment_chart"></div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article col-xs-12 col-sm-6 col-lg-4">
-                <div class="row no-gutters text-center">
-                    <div class="row content-box">
-                        <div class="row">
-                            <div class="text-center">Family History</div>
-                            <hr class="line">
-                            <div>
-                                <p class="chart-text">Of the total respondent count, 492 indicated that mental health issues had been prevalent in their family history.</p>
-                            </div>
-                            <div class="row">
-                                <div class="chart" id="family_history"></div>
-                            </div>
+                        <p class="chart-text">There is a near 50/50 split between respondents that had previously sought help for mental health issues and those that hadn't.</p>
+                        <div class="row chart">
+                            <div id="treatment_chart"></div>
                         </div>
                     </div>
                 </div>
-            </article>
-        </div>
+                <div class="col-xs-12 col-sm-12 col-lg-4">
+                    <div class="content-box">
+                        <h5 class="header">Family History</h5>
+                        <hr class="line">
+                        <p class="chart-text">Of the total respondent count, 492 indicated that mental health issues had been prevalent in their family history.</p>
+                        <div class="row chart">
+                            <div id="family_history"></div>
+                        </div>
+                        <p class="chart-text">When filtered by 'Yes', the numbers for overall Treatment Levels and Treatment by Gender increase, which indicates a correlation between Family History and mental health issues.</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
 
+    <section class="container">
         <div class="row">
-            <article class="article col-xs-12 col-sm-6 col-lg-4">
-                <div class="row no-gutters text-center">
-                    <div class="row content-box">
-                        <div class="row">
-                            <div class="text-center">Physical Impact</div>
-                            <hr class="line">
-                            <div>
-                                <p class="chart-text">Respondents were asked if they felt that discussing a physical health issue with their employer would have negative consequences. 7% of women and 4% of men felt that there would.</p>
-                            </div>
-                            <div class="row">
-                                <div class="chart" id="physical_impact"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
+            <div class="col-xs-12 col-sm-12 col-lg-4">
+                <div class="content-box">
 
-            <article class="article col-xs-12 col-sm-6 col-lg-4">
-                <div class="row no-gutters text-center">
-                    <div class="row content-box">
-                        <div class="row">
-                            <div class="text-center">Mental Impact</div>
-                            <hr class="line">
-                            <div>
-                                <p class="chart-text">Respondents were asked if they felt that discussing a mental health issue with their employer would have negative consequences. 27% of women and 22% of men felt that there would. This contrasts to the much lower numbers
-                                    for physical health.</p>
-                            </div>
-                            <div class="row">
-                                <div class="chart" id="mental_impact"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
+                    <h5 class="header">Physical Impact</h5>
 
-            <article class="article col-xs-12 col-sm-6 col-lg-4">
-                <div class="row no-gutters text-center">
-                    <div class="row content-box">
-                        <div class="row">
-                            <div class="text-center">Wellness Program</div>
-                            <hr class="line">
-                            <div>
-                                <p class="chart-text">The majority of respondents indicated that mental health was not included as part of an employee wellness program.</p>
-                            </div>
-                            <div class="row">
-                                <div class="chart" id="wellness_chart"></div>
-                            </div>
-                        </div>
+                    <hr class="line">
+                    <p class="chart-text">Respondents were asked if they felt that discussing a physical health issue with their employer would have negative consequences. 7% of women and 4% of men felt that there would.</p>
+                    <div class="row chart">
+                        <div id="physical_impact"></div>
                     </div>
                 </div>
-            </article>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-lg-4">
+                <div class="content-box">
+
+                    <h5 class="header">Mental Impact</h5>
+                    <hr class="line">
+                    <p class="chart-text">Respondents were asked if they felt that discussing a mental health issue with their employer would have negative consequences. 27% of women and 22% of men felt that there would. This contrasts to the much lower numbers for physical
+                        health.
+                    </p>
+                    <div class="row chart">
+                        <div id="mental_impact"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-lg-4">
+                <div class="content-box">
+                    <h5 class="header">Wellness Program</h5>
+                    <hr class="line">
+                    <div>
+                        <p class="chart-text">The majority of respondents indicated that mental health was not included as part of an employee wellness program.</p>
+                    </div>
+                    <div class="row chart">
+                        <div id="wellness_chart"></div>
+                    </div>
+                    <p class="chart-text">When filtered by 'No', expectations of issues when raising both physical and mental problems with employers were more negative. This indicates a possible correlation between cultures and wellness programmes.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="static/js/scripts.js"></script>
+
+    <footer class="page-footer container-fluid">
+        <div class="container-fluid">
+            <div class="page-footer text-center py-3">© Martin Russell 2019
+                <a href="https://github.com/martingr1/" target="_blank"> My Github </a> ||
+                <a href="https://www.kaggle.com/osmi/mental-health-in-tech-survey" target="_blank"> Kaggle Dataset</a>
+            </div>
+    </footer>
 </body>
 
 </html>
