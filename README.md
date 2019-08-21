@@ -1,5 +1,7 @@
 # Stream Two Interactive Development Project
 
+![dashboard image](../static/images/Dashboard_screenshot.png)
+
 #### This is my milestone project dashboard that uses a dataset sourced from kaggle to represent trends in mental health.
 
 #### The dashboard consists of 3 data selections, 4 number displays and 9 graphs, created using Javascript, DC, D3, and Crossfilter.
@@ -7,7 +9,9 @@
 
 # UX
 
-The design of this dahsboard was used to provide the user with a practical and pragmatic way to investigate trends into mental health statistics. I opted for a simple style in order to make the information as easy to digest as possible.
+
+
+The design of this dashboard was used to provide the user with a practical and pragmatic way to investigate trends into mental health statistics. I opted for a simple style in order to make the information as easy to digest as possible.
 
 Users can filter using one of the drop down selects at the top of the dashboard, or use one of the graphs in the main body.
 
@@ -24,6 +28,8 @@ There are a number of potential user groups for the dashboard.
 # Features
 
 # Existing Features
+
+Code is called in an IIFE in order to preserve privacy and security.
 
 There are three data selectors in the introduction section that provide users an easy way to filter the data by Company type, Gender or Date.
 
