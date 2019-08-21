@@ -1,6 +1,6 @@
 (function () {
     queue()
-        .defer(d3.csv, "mhdashboard/data/mhsurvey2.csv")
+        .defer(d3.csv, "/mhdashboard/data/mhsurvey2.csv")
         .await(makeGraphs);
 
     function makeGraphs(error, healthData) {
@@ -286,6 +286,7 @@
             .dimension(fh_dim)
             .group(fh_group);
     }
+    
     // Impact charts
 
     function show_physical_impact(ndx) {
@@ -391,8 +392,6 @@
             .legend(dc.legend().x(205).y(20).itemHeight(15).gap(5))
             .margins({ top: 10, right: 100, bottom: 30, left: 30 });
     }
-
-
 
     function show_wellness_program(ndx) {
 

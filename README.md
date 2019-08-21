@@ -20,7 +20,7 @@ There are a number of potential user groups for the dashboard.
 2. Students who are studying related topics.
 3. People interested in or currently working in the tech industry and are looking to find out more about company cultures, attitudes or benefits.
 
-[Original mockup here](https://git)
+[Original mockup here](https://mhdashboard/static/images/mockup/MH_Dashboard.pdf)
 
 # Features
 
@@ -39,7 +39,7 @@ The treatment section is made up of three graphs. 'Treatment by Gender' shows th
 'Treatment Levels' shows the total number of people who have and havent requested treatment for mental health issues in the past.
 'Family History' shows the levels of mental health issues respondents had in their family history.
 
-The impact section uses two stacked bar grpahs to illustrate attitudes towards discussing health issues with employers.
+The impact section uses two stacked bar graphs to illustrate attitudes towards discussing health issues with employers.
 
 
 ## Technologies Used
@@ -79,6 +79,11 @@ Testing was conducted to ensure that functions performed as intended.
 2. Respondent count returned 1259 as expected.
 3. Tech company count returned 1031 as expected.
 4. The reset button reset all filters on the dashboard as expected. 
+5. 
+
+HTML was validated in w3.
+
+JS was validated in Esprima.
 
 ## User Stories
 
