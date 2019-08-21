@@ -1,10 +1,17 @@
 body {
-  background-image: url("../images/clouds_background.png");
+	background-image: url("../images/clouds_background.png");
 }
 
 .btn {
-	color: #000000;
-	background-color: #D3D3D3;
+	background-color: #FFFFF0;
+	margin: 12.5px;
+}
+
+.title {
+	color: #FFFFF0;
+	font-size: 25px;
+	font-weight: 200;
+	margin-top: 10px;
 }
 
 .filter {
@@ -34,20 +41,23 @@ body {
 	border-radius: 25px;
 	background-color: #FFFFF0;
 	opacity: 0.8;
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
+	text-align: center;
 	margin: 10px;
-	padding: 15px;
+	padding: 7.5px;
+}
+
+.top-link {
+
+	font-size: 30px;
+	padding: 25px;
+
 }
 
 .number-display {
-
+	justify-content: center;
 	font-size: 30px;
 	font-weight: 500;
-	margin: auto;
 	padding: 25px;
-	text-align: center;
 
 }
 
@@ -58,5 +68,6 @@ body {
 }
 
 .chart {
-	margin: auto;
+	margin: 10px;
+	justify-content: center;
 }

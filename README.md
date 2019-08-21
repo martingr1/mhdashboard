@@ -2,7 +2,7 @@
 
 #### This is my milestone project dashboard that uses a dataset sourced from kaggle to represent trends in mental health.
 
-#### The dashboard consists of 3 data selections, 4 number displays and 9 graphs, created using Javascript, DC, D3, and Crosfilter.
+#### The dashboard consists of 3 data selections, 4 number displays and 9 graphs, created using Javascript, DC, D3, and Crossfilter.
 
 
 # UX
@@ -42,7 +42,8 @@ The impact section uses two stacked bar grpahs to illustrate attitudes towards d
 ## Technologies Used
 
 HTML
-CSS, Bootstrap (version 4.3.1)
+CSS 
+Bootstrap (version 4.7.0)
 D3.js (version 3.5.17)
 JavaScript
 Dc.js (version 2.1.8)
@@ -99,7 +100,7 @@ Some file paths were changed following deployment to GitHub Pages.
 
 ## Content
 
-Inspiration for layout and general styling was taken from the dashboard created by Dave Laffan - [Dave's Superhero Dashboard](https://steview-d.github.io/superhero-dashboard/)
+Inspiration for layout and general styling was taken from the dashboard created by Dave Laffan - [Dave's Superhero Dashboard](https://steview-d.github.io/superhero-dashboard/) and also the dashboard created by Matt Bush - [Matt's London Dashboard](https://gitbush.github.io/london-boroughs/).
 
 # Disclaimer
 
