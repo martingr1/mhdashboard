@@ -1,14 +1,11 @@
 # Stream Two Interactive Development Project
 
-![dashboard image](../static/images/Dashboard_screenshot.png)
-
 #### This is my milestone project dashboard that uses a dataset sourced from kaggle to represent trends in mental health.
 
 #### The dashboard consists of 3 data selections, 4 number displays and 9 graphs, created using Javascript, DC, D3, and Crossfilter.
 
 
 # UX
-
 
 
 The design of this dashboard was used to provide the user with a practical and pragmatic way to investigate trends into mental health statistics. I opted for a simple style in order to make the information as easy to digest as possible.
@@ -69,9 +66,19 @@ Devices used to test were:
 2. Apple iPhone 7
 3. Apple iPhone X
 4. Apple iPad Pro
-5. Apple MacBook Pro
+5. Apple iPad
+6. Apple MacBook Pro
 
 The dashboard was able to be displayed as intended on all devices and browsers, with full responsiveness.
+
+## Manual Testing
+
+Testing was conducted to ensure that functions performed as intended.
+
+1. Average age function returned 32 for both male and female as expected.
+2. Respondent count returned 1259 as expected.
+3. Tech company count returned 1031 as expected.
+4. The reset button reset all filters on the dashboard as expected. 
 
 ## User Stories
 

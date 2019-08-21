@@ -1,6 +1,6 @@
 (function () {
     queue()
-        .defer(d3.csv, "data/mhsurvey2.csv")
+        .defer(d3.csv, "mhdashboard/data/mhsurvey2.csv")
         .await(makeGraphs);
 
     function makeGraphs(error, healthData) {
