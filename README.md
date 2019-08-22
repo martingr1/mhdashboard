@@ -22,7 +22,7 @@ There are a number of potential user groups for the dashboard.
 2. Students who are studying related topics.
 3. People interested in or currently working in the tech industry and are looking to find out more about company cultures, attitudes or benefits.
 
-[Original mockup here](https://github.com/martingr1/mhdashboard/tree/master/mockup)
+[Original mockup here](https://github.com/martingr1/mhdashboard/blob/master/static/images/mockup/MH_Dashboard.pdf)
 
 # Features
 
