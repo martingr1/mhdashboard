@@ -14,13 +14,15 @@ Users can filter using one of the drop down selects at the top of the dashboard,
 
 Content has been split into 4 categories - Respondent information, Breakdown of groups, Treatment patterns and Implications.
 
+The default colour scheme for graphs was used as it fit within the overall theme of the dashboard.
+
 There are a number of potential user groups for the dashboard.
 
 1. Mental health professionals who are looking for additional insight into mental health trends.
 2. Students who are studying related topics.
 3. People interested in or currently working in the tech industry and are looking to find out more about company cultures, attitudes or benefits.
 
-[Original mockup here](https://mhdashboard/static/images/mockup/MH_Dashboard.pdf)
+[Original mockup here](https://github.com/martingr1/mhdashboard/tree/master/mockup)
 
 # Features
 
@@ -53,6 +55,7 @@ Dc.js (version 2.1.8)
 Crossfilter.js (version 1.3.12)
 Queue.js (version 1.0.7)
 Jquery (version 3.3.1)
+Font Awesome (version 5.9)
 
 # Testing
 
@@ -79,7 +82,7 @@ Testing was conducted to ensure that functions performed as intended.
 2. Respondent count returned 1259 as expected.
 3. Tech company count returned 1031 as expected.
 4. The reset button reset all filters on the dashboard as expected. 
-5. 
+5. All number displays dynamically adjust to additional filters.
 
 HTML was validated in w3.
 
@@ -91,7 +94,6 @@ JS was validated in Esprima.
 
 A user can use the dashboard to investigate differences between male and female treatment trends, overall levels of treatment and
 any correlation between having a family history of mental illness and how that relates to current mental health.
-
 
 ### Students
 
