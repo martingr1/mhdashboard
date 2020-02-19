@@ -1,4 +1,4 @@
-# Stream Two Interactive Frontend Development Project
+# Mental Health Awareness Dashboard
 
 #### This is my milestone project dashboard that uses a dataset sourced from kaggle to represent trends in mental health.
 
